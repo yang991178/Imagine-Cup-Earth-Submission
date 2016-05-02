@@ -1,0 +1,45 @@
+﻿body {
+    background-color: black;
+    font-size: 18px;
+    color: rgb(168,168,168);
+    font-family: windows_command_prompt;
+}
+p {
+    line-height:20px;
+    letter-spacing: 0.8px
+}
+@-webkit-keyframes twinkling{
+	0%{
+		opacity:0;
+	}
+	50%{
+		opacity:1;
+	}
+    100%{
+        opacity:0;
+    }
+}
+#lit{
+	-webkit-animation: twinkling 1.5s infinite step-end;
+}
+.input {
+    border-style: none;
+    background-color: black;
+    color: rgb(168,168,168);
+    font-size: 18px;
+    font-family: windows_command_prompt;
+    width:18px
+}
+#sim {
+    text-align:center;
+    display:none;
+}
+#head {
+    display:block;
+    background-color:#ff3131;
+    color:#fff;
+    width:100%;
+}
+#game {
+    margin: 50px auto
+}
