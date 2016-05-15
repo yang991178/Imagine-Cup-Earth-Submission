@@ -46,11 +46,16 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drive D: Driver IDECD901 unit 0<br /></span>
         <span id="com" style="display:none">C:\></span><span id="lit" style="display:none">_</span></p>
     </div>
+    <div id="hint">
+        <span id="htext">hint:<br /><br />
+            <span style="margin-left:30px;font-size:21px">TYPE.</span></span>
+    </div>
     <div id="sim">
         <p id="head">NASA Algae Simulator</p>
         <canvas height="504" width="711" id="game"></canvas>
         <p>Current generation: <span id="gen">0</span>, press any key to start / pause</p>
         <p>You can plant / remove algae by clicking the block while paused</p>
+        <p>< / > : swtich between data sets</p>
     </div>
     <script src="js/gameoflife.js"></script>
     <script type="text/javascript">
@@ -62,24 +67,33 @@
             setTimeout("$('#com').show()", 4500)
             setTimeout("$('#lit').show()", 4500)
             setTimeout("enter('a:')", 4600)
+            try{
+                setTimeout("$('#hint').show()", 5600)
+                setTimeout("$('#htext').show()", 6800)
+            }
+            catch (e) {
+
+            }
         })
         function key(s, i) {
             if (i < s.length) {
-                $('body').off('keypress')
-                $('body').keypress(function () {
+                $('body').off('keyup')
+                $('body').keyup(function () {
                     $('#com').html($('#com').html() + s[i])
                     key(s, ++i)
                 })
             }
             else if (i = s.length) {
-                $('body').off('keypress')
-                $('body').keypress(function () {
+                $('body').off('keyup')
+                $('body').keyup(function () {
                     $('#com').before('<span>' + $('#com').html() + '</span><br /><br />')
                     $('#com').html('A:\\>')
-                    $('body').off('keypress')
+                    $('body').off('keyup')
                     switch (s[0]) {
                         case "a":
                             enter("dir")
+                            $('#hint').fadeOut(500)
+                            setTimeout("$('#hint').remove()",600)
                             break
                         case "d":
                             $('#com').before('<div>' + $('#dir').html() + '</div><br /><br />')
@@ -107,11 +121,11 @@
             key(s,0)
         }
         function input() {
-            $('body').keypress(function (e) {
+            $('body').keyup(function (e) {
                 if (e.which == 13) {
                     var x = $('.input').val()
                     if (parseInt(x) <= 6 && parseInt(x) >= 1) {
-                        $('body').off('keypress')
+                        $('body').off('keyup')
                         loadgame(parseInt(x))
                     }
                     else {
